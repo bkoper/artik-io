@@ -18,5 +18,13 @@ describe("Artik GPIO class", function () {
         it("shoud set OUTPUT direction");
     });
 
-    it("should  ")
+    it("should  ");
+
+    describe("pooling ", function () {
+       it("should call _startEventPinPulling() method when listeners no increase from 0");
+       it("should call _stopEventPinPulling() method when listeners no decrease to 0");
+       it("should trigger CHANGE event when value change");
+       it("should trigger RISING event when value change from low to high");
+       it("should trigger FALLING event when value change from high to low");
+    });
 });
