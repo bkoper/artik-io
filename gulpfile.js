@@ -73,6 +73,9 @@ function buildTaskFactory(name, src, concatFile) {
             .pipe(sourcemaps.init());
 
         return (concatFile ? stream.pipe(concat(concatFile)) : stream)
+            .pipe(babel({
+                babelrc: true
+            }))
             .pipe(sourcemaps.write())
             .pipe(gulp.dest(DEST_PATH));
     });
