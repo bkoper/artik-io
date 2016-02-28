@@ -1,7 +1,4 @@
-var artikGpio = require("./build/artik-gpio");
-var artikIo = require("./build/artik-io");
-
 module.exports = {
-    "artik-gpio": artikGpio,
-    "artik-io": artikIo
+    Gpio: require("./build/artik-gpio").default,
+    GpioIO: require("./build/artik-io").default
 };
