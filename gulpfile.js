@@ -33,44 +33,35 @@ var batch = require("gulp-batch");
 var del = require("del");
 var concat = require("gulp-concat");
 
-var SRC_PATH = "./src/";
-var DEST_PATH = "./build";
+const SRC_PATH = "./src/";
+const DEST_PATH = "./build";
 
 
 buildTaskFactory("lib", "lib");
 buildTaskFactory("examples", "examples");
 buildTaskFactory("devices", "devices");
 
-gulp.task("watch", function () {
-    watch(path.join(SRC_PATH, "**/*.js"), batch(function (events, done) {
-        events !== "error" && gulp.start("default", done);
-    }));
-});
-
-gulp.task("eslint", function () {
-    return gulp.src(SRC_PATH)
-        .pipe(eslint())
-        .pipe(eslint.format())
-        .pipe(eslint.failOnError());
-});
-
-gulp.task("jscs", function () {
-    return gulp.src(SRC_PATH)
-        .pipe(jscs({fix: true}))
-        .pipe(jscs.reporter())
-        .pipe(jscs.reporter("fail"));
-});
-
-gulp.task("clean", function () {
-    del(path.join(DEST_PATH, "/", "*"));
-});
-
 gulp.task("default", ["lib", "examples", "devices"]);
 
+gulp.task("watch", () => {
+    watch(path.join(SRC_PATH, "**/*.js"), batch((events, done) => events !== "error" && gulp.start("default", done)));
+});
+
+gulp.task("eslint", () => gulp.src(SRC_PATH)
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failOnError()));
+
+gulp.task("jscs", () => gulp.src(SRC_PATH)
+        .pipe(jscs({fix: true}))
+        .pipe(jscs.reporter())
+        .pipe(jscs.reporter("fail")));
+
+gulp.task("clean", () => del(path.join(DEST_PATH, "/", "*")));
+
 function buildTaskFactory(name, src, concatFile) {
-    gulp.task(name, ["jscs", "eslint"], function () {
-        var stream = gulp.src(path.join(SRC_PATH, src, "*.js"))
-            .pipe(sourcemaps.init());
+    gulp.task(name, ["jscs", "eslint"], () => {
+        var stream = gulp.src(path.join(SRC_PATH, src, "*.js")).pipe(sourcemaps.init());
 
         return (concatFile ? stream.pipe(concat(concatFile)) : stream)
             .pipe(babel({

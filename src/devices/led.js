@@ -28,14 +28,21 @@ import Device from "./device";
 export default class Led extends Device {
     constructor(pin) {
         super(pin);
+        this.stateOn = false;
     }
 
     turnOn() {
         this.gpio.digitalWrite(Gpio.value.HIGH);
+        this.stateOn = true;
     }
 
     turnOff() {
         this.gpio.digitalWrite(Gpio.value.LOW);
+        this.stateOn = false;
+    }
+
+    isOn() {
+        return this.stateOn;
     }
 
     on(event, cb) {

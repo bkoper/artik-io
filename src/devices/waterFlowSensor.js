@@ -57,8 +57,8 @@ export default class WaterFlowSensor extends Device {
                 this.percentSpeed = Math.round((flowRateRaw / maxSpeed) * 100);
                 this.pulseCount = 0;
 
-                let flowMilliLitres = roundNb((this.flowRate / 60) * 1000);
-                this.totalMillilitres += flowMilliLitres;
+                let flown = roundNb((this.flowRate / 60));
+                this.total += flown;
 
                 this.emit(WaterFlowSensor.event.CHANGE);
             }
@@ -76,12 +76,12 @@ export default class WaterFlowSensor extends Device {
     }
 
     getTotalMillilitres() {
-        return roundNb(this.totalMillilitres);
+        return roundNb(this.total);
     }
 
-	getPercentSpeed() {
-		return this.percentSpeed;
-	}
+    getPercentSpeed() {
+        return this.percentSpeed;
+    }
 
     getData() {
         return {
@@ -91,7 +91,7 @@ export default class WaterFlowSensor extends Device {
             percentAvg: 0,
             max: 0,
             maxPercent: 0,
-            total: this.totalMillilitres
+            total: parseFloat(this.total).toFixed(2)
         }
     }
 
@@ -102,7 +102,7 @@ export default class WaterFlowSensor extends Device {
     reset() {
         this.pulseCount = 0;
         this.flowRate = 0;
-        this.totalMillilitres = 0;
+        this.total = 0;
         this.percentSpeed = 0;
         this.lastTimestamp = 0;
     }
