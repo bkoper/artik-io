@@ -26,22 +26,17 @@ import Gpio from "./artik-gpio";
 
 let gpio = new Gpio(Gpio.pins.ARTIK_10[3]);
 let gpioAnalog = new Gpio(Gpio.pins.ARTIK_10["analog0"]);
+let min = 1000;
+let max = 0;
 const interval = 10;
 
 gpio.pinMode(Gpio.direction.INPUT);
 
+setInterval(() => gpioAnalog.analogRead().then((val) => {
+    let oldMin = min;
+    let oldMax = max;
+    min = val < min ? val : min;
+    max = val > max ? val : max;
 
-let min = 1000, max = 0;
-
-//setInterval(() => gpio.digitalRead().then((val) => {
-//	console.log('digital', val)
-//}), interval);
-
-
-setInterval(() => gpioAnalog.analogRead().then( (val) => {
-	let oldMin = min, oldMax = max;
-	min = val < min ? val : min;
-	max = val > max ? val : max;
-
-	(min != oldMin || max !== oldMax) && console.log(`min: ${min}, max: ${max}`);
+    (min != oldMin || max !== oldMax) && console.log(`min: ${min}, max: ${max}`);
 }), interval);

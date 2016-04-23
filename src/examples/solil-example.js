@@ -22,18 +22,17 @@
  THE SOFTWARE.
  */
 
-import SoilSensor from './soilHumid';
+import SoilSensor from "./soilHumid";
 import Gpio from "./artik-gpio";
 
 let soilSensor = new SoilSensor(Gpio.pins.ARTIK_10[3], Gpio.pins.ARTIK_10["analog0"]);
 
 const okCallback = () => console.log("humid ok");
 const notOkCallback = () => console.log("soil not humid");
-const rainIntense = val => console.log(`It's raining with power of ${val}`);
 
 soilSensor.on(SoilSensor.events.SOIL_HUMID, okCallback);
 soilSensor.on(SoilSensor.events.SOIL_NOT_HUMID, notOkCallback);
 
 setInterval(() => {
-	console.log((soilSensor.getIntense()))
+    console.log((soilSensor.getIntense()))
 }, 100);

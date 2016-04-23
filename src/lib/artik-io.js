@@ -23,14 +23,14 @@
  */
 
 let ARTIK_10 = {
-	J24: {
-		"A0": 0,
-		"A1": 1,
-		"A2": 2,
-		"A3": 5,
-		"A4": 6,
-		"A5": 7
-	},
+    J24: {
+        "A0": 0,
+        "A1": 1,
+        "A2": 2,
+        "A3": 5,
+        "A4": 6,
+        "A5": 7
+    },
 
     J26: {
         "Rx-0": null,
@@ -43,7 +43,7 @@ let ARTIK_10 = {
         "7": 11
     },
 
-	J27: {
+    J27: {
         "8": 12,
         "9": 13,
         "10": 14,
@@ -55,10 +55,10 @@ let ARTIK_10 = {
 };
 
 let ARTIK_5 = {
-	J24: {
-		"A0": 0,
-		"A1": 1,
-	},
+    J24: {
+        "A0": 0,
+        "A1": 1
+    },
 
     J26: {
         "Rx-0": "Rx",
@@ -86,8 +86,8 @@ export default {
     pins: {
         ARTIK_5: Object.assign({}, ARTIK_5, {
             //Pins 0, 1, 2, 5, 6, 7 can be used as Analog Inputs.
-			"analog0": ARTIK_10.J24["A0"],
-			"analog1": ARTIK_10.J24["A1"],
+            "analog0": ARTIK_10.J24["A0"],
+            "analog1": ARTIK_10.J24["A1"],
 
             //Pins 2-4 and 7-13 are GPIO and can be used as digital input or output
             "rx": ARTIK_5.J26["Rx-0"],
@@ -113,12 +113,12 @@ export default {
 
         ARTIK_10: Object.assign({}, ARTIK_10, {
             //Pins 0, 1, 2, 5, 6, 7 can be used as Analog Inputs.
-			"analog0": ARTIK_10.J24["A0"],
-			"analog1": ARTIK_10.J24["A1"],
-			"analog2": ARTIK_10.J24["A2"],
-			"analog3": ARTIK_10.J24["A3"],
-			"analog4": ARTIK_10.J24["A4"],
-			"analog5": ARTIK_10.J24["A5"],
+            "analog0": ARTIK_10.J24["A0"],
+            "analog1": ARTIK_10.J24["A1"],
+            "analog2": ARTIK_10.J24["A2"],
+            "analog3": ARTIK_10.J24["A3"],
+            "analog4": ARTIK_10.J24["A4"],
+            "analog5": ARTIK_10.J24["A5"],
 
             //Pins 2-4 and 7-13 are GPIO and can be used as digital input or output
             "rx": ARTIK_10.J26["Rx-0"],

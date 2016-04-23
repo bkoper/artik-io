@@ -22,7 +22,7 @@
  THE SOFTWARE.
  */
 
-import RainDetector from './rainDetector';
+import RainDetector from "./rainDetector";
 import Gpio from "./artik-gpio";
 
 let rainDetector = new RainDetector(Gpio.pins.ARTIK_10[3], Gpio.pins.ARTIK_10["analog0"]);
@@ -35,5 +35,5 @@ rainDetector.on(RainDetector.events.START_RAINING, startsRainingCallback);
 rainDetector.on(RainDetector.events.STOP_RAINING, stopsRainingCallback);
 
 setInterval(() => {
-	console.log(rainDetector.getIntense(rainIntense))
+    console.log(rainDetector.getIntense(rainIntense))
 }, 1000);

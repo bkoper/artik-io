@@ -40,8 +40,4 @@ export default class Device extends EventEmitter {
     unload() {
         this.gpio.unload();
     }
-
-    turnOn() {}
-
-    turnOff() {}
 }

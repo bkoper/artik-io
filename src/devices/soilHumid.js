@@ -27,56 +27,47 @@
 import Gpio from "./artik-gpio";
 import Device from "./device";
 
-const maxAnalogVal = 950;
-const minAnalogVal = 710;
-const range = maxAnalogVal - minAnalogVal;
-
 // ~940 not humid
 // ~870 humid ok
 // ~800 very humid
 // ~750 to humid
 
 export default class SoilHumidity extends Device {
-	constructor(digitalPinNb, analogPinNb) {
-		super(digitalPinNb);
+    constructor(digitalPinNb, analogPinNb) {
+        super(digitalPinNb);
 
-		this.digitalPin = this.gpio;
-		this.digitalPin.pinMode(Gpio.direction.INPUT);
-		this.analogPin = new Gpio(analogPinNb);
-		this.pullingId = setInterval(this._updateCurrentIntense.bind(this), 50);
-		this.currentIntense = 0;
-	}
+        this.digitalPin = this.gpio;
+        this.digitalPin.pinMode(Gpio.direction.INPUT);
+        this.analogPin = new Gpio(analogPinNb);
+        this.pullingId = setInterval(this._updateCurrentIntense.bind(this), 50);
+        this.currentIntense = 0;
+    }
 
-	getIntense() {
-		return this.currentIntense;
-	}
+    getIntense() {
+        return this.currentIntense;
+    }
 
-	on(event, callback) {
-		this.digitalPin.on(event, callback);
-	}
+    on(event, callback) {
+        this.digitalPin.on(event, callback);
+    }
 
-	off(event, callback) {
-		this.digitalPin.off(event, callback);
-	}
+    off(event, callback) {
+        this.digitalPin.off(event, callback);
+    }
 
-	turnOff() {
-		this.digitalPin.removeListener(Gpio.event.CHANGE, this._updateCurrentIntense);
-		super.turnOff();
+    turnOff() {
+        this.digitalPin.removeListener(Gpio.event.CHANGE, this._updateCurrentIntense);
+        super.turnOff();
 
-	}
+    }
 
-	_updateCurrentIntense() {
-		this.analogPin.analogRead().then(val => {
-			// only rough percent estimation, between 0 to 100
-			//let value = 100 - Math.round(((+val - minAnalogVal) / range) * 100);
-			//this.currentIntense = value > 100 ? 100 : (value < 0 ? 0 : value);
-			this.currentIntense = val;
-		});
-	}
+    _updateCurrentIntense() {
+        this.analogPin.analogRead().then(val => this.currentIntense = val);
+    }
 }
 
 SoilHumidity.events = {
-	STATUS_CHANGE: Gpio.event.CHANGE,
-	SOIL_HUMID: Gpio.event.FALLING,
-	SOIL_NOT_HUMID: Gpio.event.RISING
+    STATUS_CHANGE: Gpio.event.CHANGE,
+    SOIL_HUMID: Gpio.event.FALLING,
+    SOIL_NOT_HUMID: Gpio.event.RISING
 };

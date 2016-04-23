@@ -26,7 +26,6 @@ import Gpio from "./artik-gpio";
 import WaterFlowSensor from "./waterFlowSensor";
 import Led from "./led";
 
-let toggle = true;
 let sensor = new WaterFlowSensor(Gpio.pins.ARTIK_10[2]);
 let ledGreen = new Led(Gpio.pins.ARTIK_10[13]);
 let ledRed = new Led(Gpio.pins.ARTIK_10[12]);
@@ -36,7 +35,7 @@ let changeListner = () => {
     console.log("speed: ", sensor.percentSpeed, "%");
     console.log("--------------------");
 
-    if(sensor.getTotalMillilitres() > 500){
+    if (sensor.getTotalMillilitres() > 500) {
         ledRed.turnOn();
         ledGreen.turnOff();
     } else {
