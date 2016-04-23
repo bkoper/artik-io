@@ -1,5 +1,4 @@
 --recursive
---watch
 --reporter spec
 --ui bdd
 --compilers js:babel-core/register

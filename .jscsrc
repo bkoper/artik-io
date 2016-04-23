@@ -1,7 +1,4 @@
 {
-    "esnext": true,
-    "esprima": "esprima-fb",
-
     "requireCurlyBraces": [
         "if",
         "else",
