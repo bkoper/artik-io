@@ -1,3 +1,15 @@
+"use strict";
+
+var _rainDetector = require("./rainDetector");
+
+var _rainDetector2 = _interopRequireDefault(_rainDetector);
+
+var _artikGpio = require("./artik-gpio");
+
+var _artikGpio2 = _interopRequireDefault(_artikGpio);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /*
  The MIT License (MIT)
 
@@ -22,22 +34,21 @@
  THE SOFTWARE.
  */
 
-import Gpio from "../lib/artik-gpio";
-import EventEmitter from "events";
+var rainDetector = new _rainDetector2.default(_artikGpio2.default.pins.ARTIK_10[3], _artikGpio2.default.pins.ARTIK_10["analog0"]);
 
-export default class Device extends EventEmitter {
-    constructor(pin) {
-        super();
-        this.pin = pin;
-        this.initialize();
-    }
+var startsRainingCallback = function startsRainingCallback() {
+  return console.log("starts raining");
+};
+var stopsRainingCallback = function stopsRainingCallback() {
+  return console.log("stops raining");
+};
+var rainIntense = function rainIntense(val) {
+  return console.log("It's raining with power of " + val + "%");
+};
 
-    initialize() {
-        this.gpio = new Gpio(this.pin);
-        this.gpio.pinMode(Gpio.direction.OUTPUT);
-    }
+rainDetector.on(_rainDetector2.default.events.START_RAINING, startsRainingCallback);
+rainDetector.on(_rainDetector2.default.events.STOP_RAINING, stopsRainingCallback);
 
-    unload() {
-        this.gpio.unload();
-    }
-}
+setInterval(function () {
+  console.log(rainDetector.getIntense(rainIntense));
+}, 1000);

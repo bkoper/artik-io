@@ -8,7 +8,7 @@ describe("Artik GPIO class", function () {
         gpio = new Gpio(Gpio.pins.ARTIK_10[3]);
     });
 
-    it("testing testing", function () {
+    it("testing testing f", function () {
         assert.equal(-1, [1,2,3].indexOf(5));
     });
 

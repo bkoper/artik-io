@@ -6,13 +6,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _artikGpio = require("./artik-gpio");
+var _artikGpio = require("../lib/artik-gpio");
 
 var _artikGpio2 = _interopRequireDefault(_artikGpio);
 
-var _events = require("events");
+var _device = require("./device");
 
-var _events2 = _interopRequireDefault(_events);
+var _device2 = _interopRequireDefault(_device);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44,40 +44,48 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 THE SOFTWARE.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
-var Device = function (_EventEmitter) {
-    _inherits(Device, _EventEmitter);
+var Led = function (_Device) {
+    _inherits(Led, _Device);
 
-    function Device(pin) {
-        _classCallCheck(this, Device);
+    function Led(pin) {
+        _classCallCheck(this, Led);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Device).call(this));
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Led).call(this, pin));
 
-        _this.pin = pin;
-        _this.initialize();
+        _this.stateOn = false;
         return _this;
     }
 
-    _createClass(Device, [{
-        key: "initialize",
-        value: function initialize() {
-            this.gpio = new _artikGpio2.default(this.pin);
-            this.gpio.pinMode(_artikGpio2.default.direction.OUTPUT);
-        }
-    }, {
-        key: "unload",
-        value: function unload() {
-            this.gpio.unload();
-        }
-    }, {
+    _createClass(Led, [{
         key: "turnOn",
-        value: function turnOn() {}
+        value: function turnOn() {
+            this.gpio.digitalWrite(_artikGpio2.default.value.HIGH);
+            this.stateOn = true;
+        }
     }, {
         key: "turnOff",
-        value: function turnOff() {}
+        value: function turnOff() {
+            this.gpio.digitalWrite(_artikGpio2.default.value.LOW);
+            this.stateOn = false;
+        }
+    }, {
+        key: "isOn",
+        value: function isOn() {
+            return this.stateOn;
+        }
+    }, {
+        key: "on",
+        value: function on(event, cb) {
+            this.gpio.on(event, cb);
+        }
+    }, {
+        key: "off",
+        value: function off(event, cb) {
+            this.gpio.off(event, cb);
+        }
     }]);
 
-    return Device;
-}(_events2.default);
+    return Led;
+}(_device2.default);
 
-exports.default = Device;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRldmljZS5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBMkJxQjs7O0FBQ2pCLGFBRGlCLE1BQ2pCLENBQVksR0FBWixFQUFpQjs4QkFEQSxRQUNBOzsyRUFEQSxvQkFDQTs7QUFFYixjQUFLLEdBQUwsR0FBVyxHQUFYLENBRmE7QUFHYixjQUFLLFVBQUwsR0FIYTs7S0FBakI7O2lCQURpQjs7cUNBT0o7QUFDVCxpQkFBSyxJQUFMLEdBQVksd0JBQVMsS0FBSyxHQUFMLENBQXJCLENBRFM7QUFFVCxpQkFBSyxJQUFMLENBQVUsT0FBVixDQUFrQixvQkFBSyxTQUFMLENBQWUsTUFBZixDQUFsQixDQUZTOzs7O2lDQUtKO0FBQ0wsaUJBQUssSUFBTCxDQUFVLE1BQVYsR0FESzs7OztpQ0FJQTs7O2tDQUVDOzs7V0FsQk8iLCJmaWxlIjoiZGV2aWNlLmpzIiwic291cmNlc0NvbnRlbnQiOlsiLypcbiBUaGUgTUlUIExpY2Vuc2UgKE1JVClcblxuIENvcHlyaWdodCAoYykgMjAxNiBCYXJ0bG9taWVqIEtvcGVyIDxia29wZXJAZ21haWwuY29tPlxuXG4gUGVybWlzc2lvbiBpcyBoZXJlYnkgZ3JhbnRlZCwgZnJlZSBvZiBjaGFyZ2UsIHRvIGFueSBwZXJzb24gb2J0YWluaW5nIGEgY29weVxuIG9mIHRoaXMgc29mdHdhcmUgYW5kIGFzc29jaWF0ZWQgZG9jdW1lbnRhdGlvbiBmaWxlcyAodGhlICdTb2Z0d2FyZScpLCB0byBkZWFsXG4gaW4gdGhlIFNvZnR3YXJlIHdpdGhvdXQgcmVzdHJpY3Rpb24sIGluY2x1ZGluZyB3aXRob3V0IGxpbWl0YXRpb24gdGhlIHJpZ2h0c1xuIHRvIHVzZSwgY29weSwgbW9kaWZ5LCBtZXJnZSwgcHVibGlzaCwgZGlzdHJpYnV0ZSwgc3VibGljZW5zZSwgYW5kL29yIHNlbGxcbiBjb3BpZXMgb2YgdGhlIFNvZnR3YXJlLCBhbmQgdG8gcGVybWl0IHBlcnNvbnMgdG8gd2hvbSB0aGUgU29mdHdhcmUgaXNcbiBmdXJuaXNoZWQgdG8gZG8gc28sIHN1YmplY3QgdG8gdGhlIGZvbGxvd2luZyBjb25kaXRpb25zOlxuXG4gVGhlIGFib3ZlIGNvcHlyaWdodCBub3RpY2UgYW5kIHRoaXMgcGVybWlzc2lvbiBub3RpY2Ugc2hhbGwgYmUgaW5jbHVkZWQgaW5cbiBhbGwgY29waWVzIG9yIHN1YnN0YW50aWFsIHBvcnRpb25zIG9mIHRoZSBTb2Z0d2FyZS5cblxuIFRIRSBTT0ZUV0FSRSBJUyBQUk9WSURFRCAnQVMgSVMnLCBXSVRIT1VUIFdBUlJBTlRZIE9GIEFOWSBLSU5ELCBFWFBSRVNTIE9SXG4gSU1QTElFRCwgSU5DTFVESU5HIEJVVCBOT1QgTElNSVRFRCBUTyBUSEUgV0FSUkFOVElFUyBPRiBNRVJDSEFOVEFCSUxJVFksXG4gRklUTkVTUyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBPU0UgQU5EIE5PTklORlJJTkdFTUVOVC4gSU4gTk8gRVZFTlQgU0hBTEwgVEhFXG4gQVVUSE9SUyBPUiBDT1BZUklHSFQgSE9MREVSUyBCRSBMSUFCTEUgRk9SIEFOWSBDTEFJTSwgREFNQUdFUyBPUiBPVEhFUlxuIExJQUJJTElUWSwgV0hFVEhFUiBJTiBBTiBBQ1RJT04gT0YgQ09OVFJBQ1QsIFRPUlQgT1IgT1RIRVJXSVNFLCBBUklTSU5HIEZST00sXG4gT1VUIE9GIE9SIElOIENPTk5FQ1RJT04gV0lUSCBUSEUgU09GVFdBUkUgT1IgVEhFIFVTRSBPUiBPVEhFUiBERUFMSU5HUyBJTlxuIFRIRSBTT0ZUV0FSRS5cbiAqL1xuXG5pbXBvcnQgR3BpbyBmcm9tIFwiLi9hcnRpay1ncGlvXCI7XG5pbXBvcnQgRXZlbnRFbWl0dGVyIGZyb20gXCJldmVudHNcIjtcblxuZXhwb3J0IGRlZmF1bHQgY2xhc3MgRGV2aWNlIGV4dGVuZHMgRXZlbnRFbWl0dGVyIHtcbiAgICBjb25zdHJ1Y3RvcihwaW4pIHtcbiAgICAgICAgc3VwZXIoKTtcbiAgICAgICAgdGhpcy5waW4gPSBwaW47XG4gICAgICAgIHRoaXMuaW5pdGlhbGl6ZSgpO1xuICAgIH1cblxuICAgIGluaXRpYWxpemUoKSB7XG4gICAgICAgIHRoaXMuZ3BpbyA9IG5ldyBHcGlvKHRoaXMucGluKTtcbiAgICAgICAgdGhpcy5ncGlvLnBpbk1vZGUoR3Bpby5kaXJlY3Rpb24uT1VUUFVUKTtcbiAgICB9XG5cbiAgICB1bmxvYWQoKSB7XG4gICAgICAgIHRoaXMuZ3Bpby51bmxvYWQoKTtcbiAgICB9XG5cbiAgICB0dXJuT24oKSB7fVxuXG4gICAgdHVybk9mZigpIHt9XG59Il0sInNvdXJjZVJvb3QiOiIvc291cmNlLyJ9
+exports.default = Led;

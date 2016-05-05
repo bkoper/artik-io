@@ -1,3 +1,15 @@
+"use strict";
+
+var _soilHumid = require("./soilHumid");
+
+var _soilHumid2 = _interopRequireDefault(_soilHumid);
+
+var _artikGpio = require("./artik-gpio");
+
+var _artikGpio2 = _interopRequireDefault(_artikGpio);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /*
  The MIT License (MIT)
 
@@ -22,22 +34,18 @@
  THE SOFTWARE.
  */
 
-import Gpio from "../lib/artik-gpio";
-import EventEmitter from "events";
+var soilSensor = new _soilHumid2.default(_artikGpio2.default.pins.ARTIK_10[3], _artikGpio2.default.pins.ARTIK_10["analog0"]);
 
-export default class Device extends EventEmitter {
-    constructor(pin) {
-        super();
-        this.pin = pin;
-        this.initialize();
-    }
+var okCallback = function okCallback() {
+  return console.log("humid ok");
+};
+var notOkCallback = function notOkCallback() {
+  return console.log("soil not humid");
+};
 
-    initialize() {
-        this.gpio = new Gpio(this.pin);
-        this.gpio.pinMode(Gpio.direction.OUTPUT);
-    }
+soilSensor.on(_soilHumid2.default.events.SOIL_HUMID, okCallback);
+soilSensor.on(_soilHumid2.default.events.SOIL_NOT_HUMID, notOkCallback);
 
-    unload() {
-        this.gpio.unload();
-    }
-}
+setInterval(function () {
+  console.log(soilSensor.getIntense());
+}, 100);

@@ -1,3 +1,15 @@
+"use strict";
+
+var _artikGpio = require("./artik-gpio");
+
+var _artikGpio2 = _interopRequireDefault(_artikGpio);
+
+var _led = require("./led");
+
+var _led2 = _interopRequireDefault(_led);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /*
  The MIT License (MIT)
 
@@ -22,22 +34,26 @@
  THE SOFTWARE.
  */
 
-import Gpio from "../lib/artik-gpio";
-import EventEmitter from "events";
+var toggle = true;
+var led = new _led2.default(_artikGpio2.default.pins.ARTIK_10.J27[13]);
+var interval = 100;
+var stopTime = 5000;
+var event = _artikGpio2.default.event.RISING;
 
-export default class Device extends EventEmitter {
-    constructor(pin) {
-        super();
-        this.pin = pin;
-        this.initialize();
-    }
+var iv = setInterval(function () {
+    toggle = !toggle;
+    toggle ? led.turnOn() : led.turnOff();
+}, interval);
 
-    initialize() {
-        this.gpio = new Gpio(this.pin);
-        this.gpio.pinMode(Gpio.direction.OUTPUT);
-    }
+led.on(event, callback);
 
-    unload() {
-        this.gpio.unload();
-    }
+setTimeout(function () {
+    led.off(event, callback);
+    led.turnOff();
+    led.unload();
+    clearInterval(iv);
+}, stopTime);
+
+function callback(val) {
+    console.log(val);
 }

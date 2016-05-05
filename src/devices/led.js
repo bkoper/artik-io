@@ -22,7 +22,7 @@
  THE SOFTWARE.
  */
 
-import Gpio from "./artik-gpio";
+import Gpio from "../lib/artik-gpio";
 import Device from "./device";
 
 export default class Led extends Device {

@@ -1,9 +1,9 @@
 module.exports = {
     lib: {
-        Gpio: require("./build/artik-gpio").default,
-        GpioIO: require("./build/artik-io").default
+        Gpio: require("./dist/artik-gpio").default,
+        GpioIO: require("./dist/artik-io").default
     },
     devices: {
-        Led: require("./build/led").default
+        Led: require("./dist/led").default
     }
 };

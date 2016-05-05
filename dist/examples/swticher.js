@@ -1,3 +1,15 @@
+"use strict";
+
+var _switcher_srd05vdcSlC = require("./switcher_srd-05vdc-sl-c");
+
+var _switcher_srd05vdcSlC2 = _interopRequireDefault(_switcher_srd05vdcSlC);
+
+var _artikGpio = require("./artik-gpio");
+
+var _artikGpio2 = _interopRequireDefault(_artikGpio);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /*
  The MIT License (MIT)
 
@@ -22,22 +34,10 @@
  THE SOFTWARE.
  */
 
-import Gpio from "../lib/artik-gpio";
-import EventEmitter from "events";
+var switcher = new _switcher_srd05vdcSlC2.default(_artikGpio2.default.pins.ARTIK_10.J27[13]);
+var isOn = true;
 
-export default class Device extends EventEmitter {
-    constructor(pin) {
-        super();
-        this.pin = pin;
-        this.initialize();
-    }
-
-    initialize() {
-        this.gpio = new Gpio(this.pin);
-        this.gpio.pinMode(Gpio.direction.OUTPUT);
-    }
-
-    unload() {
-        this.gpio.unload();
-    }
-}
+setInterval(function () {
+  isOn = !isOn;
+  isOn ? switcher.turnOn() : switcher.turnOff();
+}, 2500);

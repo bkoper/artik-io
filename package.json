@@ -12,7 +12,9 @@
     "watch:test": "npm t -- -w",
     "lint": "eslint src && jscs src/*",
     "prebuild": "rm -rf build",
-    "build": "babel src --out-dir build"
+    "build": "babel src --out-dir build",
+    "prebuild:prod": "rm -rf dist",
+    "build:prod": "babel src --out-dir dist"
   },
   "author": "Bartłomiej Koper",
   "license": "MIT",
@@ -34,6 +36,9 @@
     "plugins": [
       "transform-es2015-modules-commonjs"
     ]
+  },
+  "nyc": {
+    "include": ["src"]
   },
   "config" : {
     "ghooks": {
