@@ -24,7 +24,7 @@
  Soil humidity sensor
  */
 
-import Gpio from "./artik-gpio";
+import Gpio from "../lib/artik-gpio";
 import Device from "./device";
 
 // ~940 not humid

@@ -25,7 +25,7 @@
  Model: YL-83
  */
 
-import Gpio from "./artik-gpio";
+import Gpio from "../lib/artik-gpio";
 import Device from "./device";
 
 const maxAnalogVal = 930;

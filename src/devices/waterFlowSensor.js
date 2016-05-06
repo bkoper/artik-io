@@ -25,7 +25,7 @@
  Model: YF-S201
  */
 
-import Gpio from "./artik-gpio";
+import Gpio from "../lib/artik-gpio";
 import Device from "./device";
 
 const calibrationFactor = 7.5;
