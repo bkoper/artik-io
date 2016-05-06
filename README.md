@@ -37,7 +37,7 @@ To get full overview please refer to ```src/examples``` where you can find list 
 for devices. You can also check ```devices``` directory, where you can get an idea how devices are created.
 All of them are pretty simple, but you can get an idea how to use this library.
  
-# How does it works
+# How does it work
 
 _tbd_
  
