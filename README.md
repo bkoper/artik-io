@@ -1,0 +1,1 @@
+[![travis build](https://img.shields.io/travis/bkoper/artik-suite.svg?style=flat-square)](https://api.travis-ci.org/bkoper/artik-suite.svg?branch=master)
