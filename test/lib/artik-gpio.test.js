@@ -1,5 +1,5 @@
-import Gpio from '../../src/lib/artik-gpio';
-import assert from 'assert';
+import Gpio from "../../src/lib/artik-gpio";
+import assert from "assert";
 
 describe("Artik GPIO class", function () {
     let gpio;
