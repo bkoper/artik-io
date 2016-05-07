@@ -44,9 +44,8 @@
     ]
   },
   "nyc": {
-    "include": [
-      "src"
-    ]
+    "include": ["src"],
+    "reporter": ["lcov"]
   },
   "config": {
     "ghooks": {
