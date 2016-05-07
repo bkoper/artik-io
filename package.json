@@ -1,7 +1,7 @@
 {
   "name": "artik-suite",
   "version": "0.9.0",
-  "description": "",
+  "description": "GPIO library for Artik devices. It gives possibility to communicate with Gpio from Node.js enviroment.",
   "main": "index.js",
   "directories": {
     "examples": "build/examples",
