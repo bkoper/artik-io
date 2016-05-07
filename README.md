@@ -1,4 +1,5 @@
 [![travis build](https://img.shields.io/travis/bkoper/artik-suite.svg?style=flat-square)](https://api.travis-ci.org/bkoper/artik-suite.svg?branch=master)
+[![MIT License](https://img.shields.io/npm/l/starwars-names.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 
 _Description as well as whole project is still under construction. It is not final version_
 
