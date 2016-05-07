@@ -1,6 +1,6 @@
 {
   "name": "artik-suite",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "GPIO library for Artik devices. It gives possibility to communicate with Gpio from Node.js enviroment.",
   "main": "index.js",
   "directories": {
@@ -29,9 +29,9 @@
     "watch:test": "npm t -- -w",
     "lint": "eslint src && jscs src/*",
     "prebuild": "rm -rf build",
-    "build": "babel src --out-dir build",
+    "build": "babel src/devices src/lib src/examples --out-dir build",
     "prebuild:prod": "rm -rf dist",
-    "build:prod": "babel src --out-dir dist"
+    "build:prod": "babel src/devices src/lib --out-dir dist"
   },
   "author": "Bartłomiej Koper <bkoper@gmail.com>",
   "license": "MIT",
