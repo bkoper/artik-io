@@ -6,7 +6,7 @@ _Description as well as whole project is still under construction. It is not fin
 
 # Artik IO
 
-GPIO library for [Artik](https://www.artik.io/) devices. 
+GPIO library for [Artik](https://www.artik.io/) devices.
 It gives you possibility to communicate with Gpio from *Node.js* enviroment.
 
 # Installation
