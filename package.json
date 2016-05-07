@@ -7,6 +7,20 @@
     "examples": "build/examples",
     "test": "tests"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bkoper/artik-suite.git"
+  },
+  "keywords": [
+    "artik",
+    "artik-suite",
+    "gpio"
+  ],
+  "files": [
+    "dist",
+    "index.js",
+    "README.md"
+  ],
   "scripts": {
     "cover": "nyc npm t",
     "check-coverage": "nyc check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
@@ -19,8 +33,12 @@
     "prebuild:prod": "rm -rf dist",
     "build:prod": "babel src --out-dir dist"
   },
-  "author": "Bartłomiej Koper",
+  "author": "Bartłomiej Koper <bkoper@gmail.com>",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bkoper/artik-suite/issues"
+  },
+  "homepage": "https://github.com/bkoper/artik-suite#readme",
   "devDependencies": {
     "babel-cli": "^6.8.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.3.16",
