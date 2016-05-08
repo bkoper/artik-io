@@ -30,9 +30,9 @@
     "watch:test": "npm t -- -w",
     "lint": "eslint src && jscs src/*",
     "prebuild": "rm -rf build",
-    "build": "babel src/devices src/lib src/examples --out-dir build",
+    "build": "babel src --out-dir build",
     "prebuild:prod": "rm -rf dist",
-    "build:prod": "babel src/devices src/lib --out-dir dist"
+    "build:prod": "babel src --out-dir dist"
   },
   "author": "Bartłomiej Koper <bkoper@gmail.com>",
   "license": "MIT",

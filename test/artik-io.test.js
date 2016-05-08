@@ -1,5 +1,4 @@
-import GpioIO from '../../src/lib/artik-io';
-import Led from '../../src/devices/led';
+import GpioIO from '../src/artik-io';
 import {expect} from 'chai';
 
 describe("Artik IO", function () {
