@@ -1,6 +1,6 @@
 [![travis build](https://img.shields.io/travis/bkoper/artik-io.svg?style=flat-square)](https://api.travis-ci.org/bkoper/artik-io.svg?branch=master)
 [![codecov coverage](https://img.shields.io/codecov/c/github/bkoper/artik-io.svg?style=flat-square)](https://codecov.io/github/bkoper/artik-io)
-[![MIT License](https://img.shields.io/github/license/bkoper/artik-io?style=flat-square)](http://opensource.org/licenses/MIT)
+[![MIT License](https://img.shields.io/github/license/bkoper/artik-io.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 
 _Description as well as whole project is still under construction. It is not final version_
 
