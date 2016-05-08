@@ -25,9 +25,8 @@ npm build
 it will output library files to ```dist``` directory, which meant to be included in npm package.
 
 ## Structure
-- ```src/lib``` 
-    - ```artik-gpio.js``` - main library, responsible for all IO communication
-    - ```artik-io.js``` - gpio mapping based on artik documentation that can be found [here](https://developer.artik.io/documentation/developer-guide/gpio-mapping.html)
+- ```artik-gpio.js``` - main library, responsible for all IO communication
+- ```artik-io.js``` - gpio mapping based on artik documentation that can be found [here](https://developer.artik.io/documentation/developer-guide/gpio-mapping.html)
 
 
 ## Usage and samples
