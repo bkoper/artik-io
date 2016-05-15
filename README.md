@@ -20,7 +20,7 @@ npm build
 ### Production build
 ```
 npm i
-npm build
+npm build:prod
 ```
 it will output library files to ```dist``` directory, which meant to be included in npm package.
 
