@@ -92,7 +92,7 @@ export default class Gpio extends EventEmitter {
     pinMode(direction = staticValues.direction.INPUT) {
         validate(directionSet, direction);
 
-        this.load(this.pin)
+        return this.load(this.pin)
             .then(() => fs.writeFile(getPinPath(this.pin, "direction"), direction))
             .catch(err => console.warn(err));
     }
@@ -117,12 +117,12 @@ export default class Gpio extends EventEmitter {
         });
     }
 
-    on(event = staticValues.event.CHANGE, cb = null) {
+    on(event, cb = null) {
         !this._getListenersNb() && this._startEventPinPulling();
         this.addListener(event, cb);
     }
 
-    off(event = staticValues.event.CHANGE, cb = null) {
+    off(event, cb = null) {
         this.removeListener(event, cb);
         !this._getListenersNb() && this._stopEventPinPulling();
     }

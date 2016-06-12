@@ -52,7 +52,8 @@
     "istanbul": "^0.4.2",
     "jscs": "^3.0.3",
     "mocha": "^2.4.5",
-    "nyc": "^6.4.0"
+    "nyc": "^6.4.0",
+    "sinon": "^1.17.4"
   },
   "babel": {
     "presets": [
@@ -63,8 +64,12 @@
     ]
   },
   "nyc": {
-    "include": ["src"],
-    "reporter": ["lcov"]
+    "include": [
+      "src"
+    ],
+    "reporter": [
+      "lcov"
+    ]
   },
   "config": {
     "ghooks": {
