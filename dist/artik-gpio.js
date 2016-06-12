@@ -52,6 +52,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 THE SOFTWARE.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
+var ENOENT = -2;
 var staticValues = {
     value: {
         HIGH: 1,
@@ -116,7 +117,7 @@ var Gpio = function (_EventEmitter) {
                 _fs2.default.access(getPinPath(_this2.pin), _fs2.default.F_OK, function (err) {
                     if (!err) {
                         resolve();
-                    } else if (err.errno === -2) {
+                    } else if (err.errno === ENOENT) {
                         _fs2.default.writeFile(GPIO_EXPORT, _this2.pin, function (err) {
                             return err ? reject(err) : resolve();
                         });
@@ -146,10 +147,10 @@ var Gpio = function (_EventEmitter) {
 
             validate(directionSet, direction);
 
-            this.load(this.pin).then(function () {
+            return this.load(this.pin).then(function () {
                 return _fs2.default.writeFile(getPinPath(_this4.pin, "direction"), direction);
             }).catch(function (err) {
-                return console.warn(err);
+                throw new Error(err);
             });
         }
     }, {
@@ -191,8 +192,7 @@ var Gpio = function (_EventEmitter) {
         }
     }, {
         key: "on",
-        value: function on() {
-            var event = arguments.length <= 0 || arguments[0] === undefined ? staticValues.event.CHANGE : arguments[0];
+        value: function on(event) {
             var cb = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 
             !this._getListenersNb() && this._startEventPinPulling();
@@ -200,8 +200,7 @@ var Gpio = function (_EventEmitter) {
         }
     }, {
         key: "off",
-        value: function off() {
-            var event = arguments.length <= 0 || arguments[0] === undefined ? staticValues.event.CHANGE : arguments[0];
+        value: function off(event) {
             var cb = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 
             this.removeListener(event, cb);
