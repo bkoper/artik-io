@@ -95,7 +95,9 @@ export default class Gpio extends EventEmitter {
 
         return this.load(this.pin)
             .then(() => fs.writeFile(getPinPath(this.pin, "direction"), direction))
-            .catch(err => console.warn(err));
+            .catch(err => {
+                throw new Error(err);
+            });
     }
 
     digitalWrite(val = staticValues.value.LOW) {

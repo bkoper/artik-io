@@ -29,7 +29,7 @@ describe("Artik GPIO class", function () {
         });
 
         after(function () {
-           fs.writeFile.restore();
+            fs.writeFile.restore();
         });
 
         it("should return promise", function () {
@@ -39,8 +39,7 @@ describe("Artik GPIO class", function () {
         it("should return resolved promise when file is accessible", function (done) {
             fsAccesss.yields();
 
-            gpio.load()
-                .then(() => done());
+            gpio.load().then(() => done());
         });
 
         it("should call writeFile if gpio export path does not exists", function (done) {
@@ -55,8 +54,7 @@ describe("Artik GPIO class", function () {
         });
 
         it("should return rejected promise when export file is not accessible", function (done) {
-            fsAccesss.yields({errno: -2});
-            fs.writeFile.yields({});
+            fsAccesss.yields({errno: -3});
 
             gpio.load().catch(() => done());
         });
@@ -177,6 +175,62 @@ describe("Artik GPIO class", function () {
         });
     });
 
+    describe("digitalWrite method", function () {
+        let fsWriteFile;
+
+        before(function () {
+            fsWriteFile = sinon.stub(fs, "writeFile");
+        });
+
+        beforeEach(function () {
+            fsWriteFile.reset();
+        });
+
+        after(function () {
+            fsWriteFile.restore();
+        });
+
+        it("should call fs.writeFile", function () {
+            gpio.digitalWrite();
+
+            expect(fsWriteFile.called).to.be.true;
+        });
+
+        it("should return promise", function () {
+            expect(gpio.digitalWrite()).to.be.a("promise");
+        });
+
+        it("should return resolved promise if writeFile was successful", function (done) {
+            fsWriteFile.yields(null, {});
+
+            gpio.digitalWrite().then(() => done());
+        });
+
+        it("should return rejected promise if writeFile fails", function (done) {
+            fsWriteFile.yields({});
+
+            gpio.digitalWrite().catch(() => done());
+        });
+
+        it("should pass LOW value as default", function () {
+            gpio.digitalWrite();
+;
+            expect(fsWriteFile.args[0][1]).to.equal(Gpio.value.LOW);
+        });
+
+        it("should pass HIGH value", function () {
+            gpio.digitalWrite(Gpio.value.HIGH);
+
+            expect(fs.writeFile.args[0][1]).to.equal(Gpio.value.HIGH);
+        });
+
+        it("should pass LOW value", function () {
+            gpio.digitalWrite(Gpio.value.LOW);
+
+            expect(fs.writeFile.args[0][1]).to.equal(Gpio.value.LOW);
+        });
+    });
+
     describe("pinMode method", function () {
         before(() => {
             sinon.spy(fs, "writeFile");
@@ -211,6 +265,20 @@ describe("Artik GPIO class", function () {
                 expect(fs.writeFile.args[0][1]).to.equal(Gpio.direction.OUTPUT);
                 done();
             });
+        });
+
+        it("should console warn error if pin is not accessible", function (done) {
+            const errorMsg = "error message";
+            sinon.stub(gpio, "load").returns(Promise.reject(errorMsg));
+
+            gpio.pinMode(Gpio.direction.INPUT).catch(err => {
+                expect(err.message).to.be.equal(errorMsg);
+                done()
+            });
+        });
+
+        it("shoud throw an error when passing wrong argument", function () {
+            expect(gpio.pinMode.bind(null, "test")).to.throw(Error);
         });
     });
 
