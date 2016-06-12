@@ -20,7 +20,24 @@ describe("Artik GPIO class", function () {
         fs.access.restore();
     });
 
-    describe("pinMode", function () {
+    describe("load method", function () {
+        it("should return resolved promise when file is not accessible");
+        it("should call writeFile if gpio export path does not exists");
+        it("should return rejected promise when export file is not accessible");
+    });
+
+    describe("unload method", function () {
+        it("should call fs.writeFile");
+        it("should return resolved promise if unloading is succesfull");
+        it("should return rejected promise if unloading fail");
+    });
+
+    describe("analogRead method", function () {
+        it("should call fs.readFile");
+        it("should return resolved promise with analog data");
+    });
+
+    describe("pinMode method", function () {
         before(() => {
             sinon.spy(fs, "writeFile");
         });

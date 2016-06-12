@@ -27,6 +27,7 @@ import path from "path";
 import EventEmitter from "events";
 import artikIO from "./artik-io";
 
+const ENOENT = -2;
 const staticValues = {
     value: {
         HIGH: 1,
@@ -74,7 +75,7 @@ export default class Gpio extends EventEmitter {
             fs.access(getPinPath(this.pin), fs.F_OK, err => {
                 if (!err) {
                     resolve();
-                } else if (err.errno === -2) {
+                } else if (err.errno === ENOENT) {
                     fs.writeFile(GPIO_EXPORT, this.pin, err => err ? reject(err) : resolve());
                 } else {
                     reject(err);
