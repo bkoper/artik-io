@@ -1,4 +1,4 @@
-import GpioIO from '../src/artik-io';
+import GpioIO from '../dist/artik-io';
 import {expect} from 'chai';
 
 describe("Artik IO", function () {

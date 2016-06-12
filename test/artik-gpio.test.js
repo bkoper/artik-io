@@ -1,4 +1,4 @@
-import Gpio from "../src/artik-gpio";
+import Gpio from "../dist/artik-gpio";
 import sinon from "sinon";
 import fs from "fs";
 import {expect} from 'chai';
