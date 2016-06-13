@@ -43,7 +43,7 @@ gpio.on(Gpio.event.RISING, () => {
 
 To see usage samples, take look at [artik-io-devices](https://github.com/bkoper/artik-io-devices) project.
 
-# Licence
+## License
 
 MIT
  
