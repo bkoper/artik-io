@@ -34,7 +34,7 @@ import {Gpio} from "artik-io";
 
 let gpio = new Gpio(Gpio.pins.ARTIK_10[12], 10);
 gpio.pinMode(Gpio.direction.INPUT);
-this.gpio.on(Gpio.event.RISING, () => {
+gpio.on(Gpio.event.RISING, () => {
     console.info("sensor is on");
 });
 ```
