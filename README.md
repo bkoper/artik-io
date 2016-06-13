@@ -8,30 +8,42 @@ GPIO library for [Artik](https://www.artik.io/) devices.
 It gives you possibility to communicate with Gpio from *Node.js* enviroment.
 
 ## Installation
-
-### Build for developer purposes
+Via npm, as a project dependency:
 ```
-npm i 
-npm build
+$ npm i -D artik-io
 ```
 
-### Production build
+## Development
+or build from source:
 ```
-npm i
-npm build:prod
+$ npm i
+$ npm build
 ```
-it will output library files to ```dist``` directory, which meant to be included in npm package.
-
-## Structure
-- ```artik-gpio.js``` - main library, responsible for all IO communication
-- ```artik-io.js``` - gpio mapping based on artik documentation that can be found [here](https://developer.artik.io/documentation/developer-guide/gpio-mapping.html)
+will output compiled libs to ```build``` directory.
 
 
-## Usage and samples
+## Project structure
+- ```src/artik-gpio.js``` - main library, responsible for all IO communication
+- ```src/artik-io.js``` - gpio mapping based on artik documentation that can be found [here](https://developer.artik.io/documentation/developer-guide/gpio-mapping.html)
+
+
+## Usage
+
+```
+import {Gpio} from "artik-io";
+
+let gpio = new Gpio(Gpio.pins.ARTIK_10[12], 10);
+gpio.pinMode(Gpio.direction.INPUT);
+this.gpio.on(Gpio.event.RISING, () => {
+    console.info("sensor is on");
+});
+```
+
+## More examples
 
 To see usage samples, take look at [artik-io-devices](https://github.com/bkoper/artik-io-devices) project.
- 
-## How does it work
 
-_tbd_
+# Licence
+
+MIT
  
