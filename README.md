@@ -29,7 +29,7 @@ will output compiled libs to ```build``` directory.
 
 ## Usage
 
-```
+```js
 import {Gpio} from "artik-io";
 
 let gpio = new Gpio(Gpio.pins.ARTIK_10[12], 10);
