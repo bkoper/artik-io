@@ -120,12 +120,12 @@ export default class Gpio extends EventEmitter {
         });
     }
 
-    on(event, cb = null) {
+    on(event, cb) {
         !this._getListenersNb() && this._startEventPinPulling();
         this.addListener(event, cb);
     }
 
-    off(event, cb = null) {
+    off(event, cb) {
         this.removeListener(event, cb);
         !this._getListenersNb() && this._stopEventPinPulling();
     }
@@ -139,7 +139,7 @@ export default class Gpio extends EventEmitter {
     _startEventPinPulling() {
         this.intervalId = setInterval(() => {
             this.digitalRead().then((val) => {
-                let newValue = +val;
+                const newValue = +val;
                 if (this.value !== newValue) {
                     this.emit(staticValues.event.CHANGE, newValue);
                     newValue === staticValues.value.HIGH ?
