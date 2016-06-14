@@ -32,7 +32,7 @@ will output compiled libs to ```build``` directory.
 ```js
 import {Gpio} from "artik-io";
 
-let gpio = new Gpio(Gpio.pins.ARTIK_10[12], 10);
+let gpio = new Gpio(Gpio.pins.ARTIK_10[12]);
 gpio.pinMode(Gpio.direction.INPUT);
 gpio.on(Gpio.event.RISING, () => {
     console.info("sensor is on");
