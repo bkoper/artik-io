@@ -22,7 +22,7 @@
  THE SOFTWARE.
  */
 
-let ARTIK_10 = {
+const ARTIK_10 = {
     J24: {
         "A0": 0,
         "A1": 1,
@@ -54,7 +54,7 @@ let ARTIK_10 = {
     }
 };
 
-let ARTIK_5 = {
+const ARTIK_5 = {
     J24: {
         "A0": 0,
         "A1": 1
